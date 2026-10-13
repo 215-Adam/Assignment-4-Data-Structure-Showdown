@@ -1,0 +1,26 @@
+Timed Challenge Reflection - Problem 13: Balanced Symbols
+
+I chose a stack, implemented as a plain Python list using append() and pop()
+at the end. Bracket matching is a last-in, first-out problem: the most recent
+bracket that was opened has to be the first one that gets closed. When I see
+an opening bracket I push it, and when I see a closing bracket I pop the top
+and check that it is the matching opener. Both operations are O(1), so the
+whole check runs in O(n) time with at most O(n) extra space. I also used a
+dictionary to map each closer to its opener, which keeps the matching logic
+to one lookup instead of a chain of if/elif statements.
+
+The 30-minute limit pushed me toward the simplest structure that clearly fit.
+I didn't build a custom Stack class with push, pop, and peek methods, because
+a list already gives O(1) operations at the end and writing a class would have
+taken time without changing the algorithm. Picking a problem whose pattern I
+recognized right away also mattered, because I could spend most of the time
+on correctness and testing instead of figuring out an approach.
+
+Under time pressure I made a few compromises. I decided that non-bracket
+characters are simply ignored rather than asking whether they should be
+rejected, and I treat an empty string as balanced. For bad input I raise a
+TypeError instead of returning False, which was a quick decision rather than
+a carefully weighed one. My tests are printed checks in a main block instead
+of a proper unittest suite. With more time I would turn those into real unit
+tests, support custom bracket pairs as a parameter, and return the position
+of the first mismatch so the function is more useful for debugging.
